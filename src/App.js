@@ -74,7 +74,7 @@ const App = () => {
             redirect: 'follow'
         }
 
-        fetch(`http://localhost:5000/delete_contact/`, requestOptions)
+        fetch(`http://localhost:5000/app/delete_contact/`, requestOptions)
             .then(response => {
                     if (response.ok)
                         return fetch("http://localhost:5000/app/get_contact/", requestOptions_1)
@@ -110,10 +110,10 @@ const App = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/change_contact/", requestOptions)
+        fetch("http://localhost:5000/app/change_contact/", requestOptions)
             .then(response => {
                     if (response.ok)
-                        return fetch("http://localhost:5000/get_contact/", requestOptions_1)
+                        return fetch("http://localhost:5000/app/get_contact/", requestOptions_1)
                             .then(response => response.text())
                             .then(result => setData(JSON.parse(result)))
                             .catch(error => console.log('error', error))
