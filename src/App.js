@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react"
-
+let url = '192.168.1.104:5000'
 const App = () => {
 
     const [data, setData] = useState('')
@@ -19,7 +19,7 @@ const App = () => {
             redirect: 'follow'
         }
 
-        fetch("http://localhost:5000/app/get_contact/", requestOptions)
+        fetch(`http://${url}/app/get_contact/`, requestOptions)
             .then(response => response.text())
             .then(result => setData(JSON.parse(result)))
             // .then(result => console.log(result.status))
@@ -45,7 +45,7 @@ const App = () => {
             redirect: 'follow'
         }
 
-        fetch("http://localhost:5000/app/add_contact/John/34", requestOptions)
+        fetch(`http://${url}/app/add_contact/John/34`, requestOptions)
             .then(response => response.text())
             .then(result => setData(JSON.parse(result)))
             .catch(error => console.log('error', error))
@@ -74,10 +74,10 @@ const App = () => {
             redirect: 'follow'
         }
 
-        fetch(`http://localhost:5000/app/delete_contact/`, requestOptions)
+        fetch(`http://${url}/app/delete_contact/`, requestOptions)
             .then(response => {
                     if (response.ok)
-                        return fetch("http://localhost:5000/app/get_contact/", requestOptions_1)
+                        return fetch(`http://${url}/app/get_contact/`, requestOptions_1)
                             .then(response => response.text())
                             .then(result => setData(JSON.parse(result)))
                             .catch(error => console.log('error', error))
@@ -110,10 +110,10 @@ const App = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/app/change_contact/", requestOptions)
+        fetch(`http://${url}/app/change_contact/`, requestOptions)
             .then(response => {
                     if (response.ok)
-                        return fetch("http://localhost:5000/app/get_contact/", requestOptions_1)
+                        return fetch(`http://${url}/app/get_contact/`, requestOptions_1)
                             .then(response => response.text())
                             .then(result => setData(JSON.parse(result)))
                             .catch(error => console.log('error', error))
