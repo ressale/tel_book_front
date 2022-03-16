@@ -1,11 +1,12 @@
-import {useCallback, useEffect, useState} from "react"
-let url = '192.168.1.104:5000'
+import {useEffect, useState} from "react"
+let url = '192.168.1.107:7000'
 const App = () => {
 
     const [data, setData] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [idForChange, setIdForChange] = useState('')
     const [input, setInput] = useState({})
+    console.log(data)
 
     //!!!!!!!!!
     const handleInputValue = (e) => {
@@ -121,6 +122,23 @@ const App = () => {
             )
     }
 
+    const searchContact = (data) => {
+        let myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json")
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify({data}),
+            redirect: 'follow'
+        }
+
+        fetch(`http://192.168.1.107:7000/app/search_contact/`, requestOptions)
+            .then(response => response.text())
+            .then(result => setData(JSON.parse(result)))
+            .catch(error => console.log('error', error))
+    }
+
     return (
         <>
             <form>
@@ -134,6 +152,8 @@ const App = () => {
                     changeContact()
                 }} type='button' disabled={disabled}>Change contact
                 </button>
+                <label>Searcher</label>
+                <input onChange={(e) => searchContact(e.target.value)}/>
             </form>
             <hr/>
             <table>
